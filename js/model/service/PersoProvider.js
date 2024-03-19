@@ -34,4 +34,20 @@ export default class PersoProvider {
            console.log('Erreur fetching perso', err)
        }
     }
+
+    static rechercheNom = async (nom) => {
+        const options = {
+           method: 'GET',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       };
+       try {
+           const response = await fetch(`${ENDPOINT}?nom=${nom}`, options)
+           const json = await response.json();
+           return json
+       } catch (err) {
+           console.log('Erreur fetching perso', err)
+       }
+    }
 }
