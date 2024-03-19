@@ -1,0 +1,15 @@
+.card {
+  margin-bottom: 20px;
+}
+.card-img-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.card-title {
+  color: transparent;
+}
+
+img {
+  width: 10vw;
+  height: 10vw;
+}
