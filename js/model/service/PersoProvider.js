@@ -1,4 +1,4 @@
-import { ENDPOINT } from '../config.js'
+import { ENDPOINT } from '../../config.js'
 
 export default class PersoProvider {
 

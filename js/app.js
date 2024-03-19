@@ -1,7 +1,10 @@
-import Home from "./views/Home";
+import Home from "./views/Home.js";
+import Utils from "./model/service/Utils.js";
+import Error404 from "./views/Error404.js";
 
 const routes = {
-    "/"    :   Home
+    "/"    :   Home,
+    // "/personnages" :   Home,
 };
 
 const router = async () => {
@@ -16,6 +19,7 @@ const router = async () => {
     let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '')
     // Get the page from our hash of supported routes.
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
+    console.log('parsedURL', parsedURL)
     let page = routes[parsedURL] ? new routes[parsedURL] : Error404
     
     content.innerHTML = await page.render();

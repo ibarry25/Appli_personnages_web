@@ -1,5 +1,4 @@
-
-import PersoProvider from '../providers/PersoProvider.js';
+import PersoProvider from '../model/service/PersoProvider.js';
 
 export default class Home {
     async render() {
