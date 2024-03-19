@@ -1,9 +1,12 @@
 import Home from "./views/Home.js";
 import Utils from "./model/service/Utils.js";
+import PersonnageAll from "./views/PersonnageAll.js";
 import Error404 from "./views/Error404.js";
+
 
 const routes = {
     "/"    :   Home,
+    "/personnages" :   PersonnageAll,
     // "/personnages" :   Home,
 };
 
