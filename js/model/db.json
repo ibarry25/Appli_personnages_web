@@ -1,52 +1,58 @@
 {
   "personnages": [
     {
-      "id": 1,
+      "id_personnage": 1,
       "nom": "Mario",
-      "type_personnage": {
+      "types_personnage": {
         "id": 1
       },
-      "description": "Mario est un plombier italien et l'un des personnages les plus emblématiques de l'histoire des jeux vidéo. Il est principalement connu pour ses aventures dans le Royaume Champignon, où il sauve souvent la princesse Peach des griffes de Bowser."
+      "description": "Mario est un plombier italien et l'un des personnages les plus emblématiques de l'histoire des jeux vidéo. Il est principalement connu pour ses aventures dans le Royaume Champignon, où il sauve souvent la princesse Peach des griffes de Bowser.",
+      "image": "https://exemple.com/images/mario.jpg"
     },
     {
-      "id": 2,
+      "id_personnage": 2,
       "nom": "Luke Skywalker",
-      "type_personnage": {
+      "types_personnage": {
         "id": 2
       },
-      "description": "Luke Skywalker est un personnage central de la saga Star Wars. Il est un jeune fermier de la planète Tatooine qui devient un Chevalier Jedi et joue un rôle crucial dans la lutte contre l'Empire Galactique."
+      "description": "Luke Skywalker est un personnage central de la saga Star Wars. Il est un jeune fermier de la planète Tatooine qui devient un Chevalier Jedi et joue un rôle crucial dans la lutte contre l'Empire Galactique.",
+      "image": "https://exemple.com/images/luke_skywalker.jpg"
     },
     {
-      "id": 3,
+      "id_personnage": 3,
       "nom": "Link",
-      "type_personnage": {
+      "types_personnage": {
         "id": 1
       },
-      "description": "Link est le héros principal de la série de jeux vidéo The Legend of Zelda. Il est souvent chargé de sauver la princesse Zelda et le royaume d'Hyrule des forces maléfiques, notamment Ganon."
+      "description": "Link est le héros principal de la série de jeux vidéo The Legend of Zelda. Il est souvent chargé de sauver la princesse Zelda et le royaume d'Hyrule des forces maléfiques, notamment Ganon.",
+      "image": "https://exemple.com/images/link.jpg"
     },
     {
-      "id": 4,
+      "id_personnage": 4,
       "nom": "Indiana Jones",
-      "type_personnage": {
-        "id": 2
+      "types_personnage": {
+        "id": 2      
       },
-      "description": "Indiana Jones est un archéologue et aventurier fictif, célèbre pour ses exploits dans la série de films d'aventure portant son nom. Il est souvent impliqué dans la recherche d'artefacts anciens tout en affrontant des adversaires dangereux."
+      "description": "Indiana Jones est un archéologue et aventurier fictif, célèbre pour ses exploits dans la série de films d'aventure portant son nom. Il est souvent impliqué dans la recherche d'artefacts anciens tout en affrontant des adversaires dangereux.",
+      "image": "https://exemple.com/images/indiana_jones.jpg"
     },
     {
-      "id": 5,
+      "id_personnage": 5,
       "nom": "Master Chief",
-      "type_personnage": {
+      "types_personnage": {
         "id": 1
       },
-      "description": "Master Chief est le protagoniste principal de la série de jeux vidéo Halo. Il est un super-soldat génétiquement amélioré et est souvent chargé de défendre l'humanité contre les menaces extraterrestres, en particulier les Covenants."
+      "description": "Master Chief est le protagoniste principal de la série de jeux vidéo Halo. Il est un super-soldat génétiquement amélioré et est souvent chargé de défendre l'humanité contre les menaces extraterrestres, en particulier les Covenants.",
+      "image": "https://exemple.com/images/master_chief.jpg"
     },
     {
-      "id": 6,
+      "id_personnage": 6,
       "nom": "Jon Snow",
-      "type_personnage": {
+      "types_personnage": {
         "id": 3
       },
-      "description": "Jon Snow est un personnage principal de la série télévisée Game of Thrones. Il est membre de la Garde de Nuit et est souvent impliqué dans les intrigues politiques et militaires de Westeros."
+      "description": "Jon Snow est un personnage principal de la série télévisée Game of Thrones. Il est membre de la Garde de Nuit et est souvent impliqué dans les intrigues politiques et militaires de Westeros.",
+      "image": "https://exemple.com/images/jon_snow.jpg"
     }
   ],
   "types_personnage": [
@@ -62,5 +68,39 @@
       "id": 3,
       "nom": "Série Télévisée"
     }
+  ],
+  "commentaires":[
+    {
+      "id": 1,
+      "id_personnage": 1,
+      "description": "Mario est un personnage emblématique, mais ses jeux peuvent parfois être répétitifs."
+    },
+    {
+      "id": 2,
+      "id_personnage": 2,
+      "description": "Luke Skywalker est un personnage emblématique de la saga Star Wars et joue un rôle crucial dans l'histoire."
+    },
+    {
+      "id": 3,
+      "id_personnage": 3,
+      "description": "Link est un héros courageux et ses aventures sont toujours passionnantes."
+    },
+    {
+      "id": 4,
+      "id_personnage": 4,
+      "description": "Indiana Jones est un aventurier intrépide et ses films sont des classiques du genre."
+    },
+    {
+      "id": 5,
+      "id_personnage" : 5,
+      "description": "Master Chief est un super-soldat impressionnant et ses jeux offrent une action intense."
+    },
+    {
+      "id": 6,
+      "id_personnage": 6,
+      "description": "Jon Snow est un personnage complexe et fascinant, et il est l'un des points forts de Game of Thrones."
+    }
+
+
   ]
 }
