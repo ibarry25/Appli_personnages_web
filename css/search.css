@@ -13,3 +13,7 @@ img {
   width: 10vw;
   height: 10vw;
 }
+
+.is-hidden{
+  display: none;
+}
