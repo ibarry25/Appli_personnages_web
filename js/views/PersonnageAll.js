@@ -3,45 +3,6 @@ import TypeProvider from '../model/service/TypeProvider.js';
 
 export default class PersonnageAll {
 
-    async afterRender() {
-
-        function liveSearch() {
-            // Locate the card elements
-            let cards = document.querySelectorAll('.card')
-            // Locate the search input
-            let search_query = document.getElementById("searchBar").value;
-            console.log(search_query);
-            // Loop through the cards
-            for (var i = 0; i < cards.length; i++) {
-              // If the text is within the card...
-              if(cards[i].innerText.toLowerCase()
-                // ...and the text matches the search query...
-                .includes(search_query.toLowerCase()) 
-                // ...and the type matches the selected type...
-                && (document.getElementById("type").value == 0 || 
-                    cards[i].innerText.toLowerCase().includes(document.getElementById("type").value.toLowerCase()))
-                ) {
-                  // ...remove the `.is-hidden` class.
-                  cards[i].classList.remove("is-hidden");
-              } else {
-                // Otherwise, add the class.
-                cards[i].classList.add("is-hidden");
-              }
-            }
-        }
-
-        //A little delay
-        let typingTimer;               
-        let typeInterval = 500;  
-        let searchInput = document.getElementById('searchBar');
-
-        searchInput.addEventListener('keyup', () => {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(liveSearch, typeInterval);
-        });
-    }
-
-
     async render() {
 
         // Fetching des données
@@ -59,8 +20,9 @@ export default class PersonnageAll {
 
         let html = personnages.map(perso =>
             /*html*/`
-                <div class="card">
+                <div class="card col-md-2">
                     <strong class="card-text">${perso.nom}</strong>
+                    <span class="card-text is-hidden">${perso.types_personnage.id}</span>
                     <img src="${perso.image}" class="card-img" alt="..." loading="lazy">
                     <div class="card-img-overlay">
                     </div>
@@ -86,7 +48,7 @@ export default class PersonnageAll {
           
 
 
-          <div class="d-flex  ">
+          <div class="row gap-2  ">
           ${html}
           </div>
           
@@ -94,6 +56,51 @@ export default class PersonnageAll {
           
         `;
     }
+
+    
+    async afterRender() {
+
+      function liveSearch() {
+          // Locate the card elements
+          let cards = document.querySelectorAll('.card')
+          // Locate the search input
+          let search_query = document.getElementById("searchBar").value;
+          console.log(search_query);
+          // Loop through the cards
+          for (var i = 0; i < cards.length; i++) {
+            // If the text is within the card...
+            if(cards[i].innerText.toLowerCase()
+              // ...and the text matches the search query...
+              .includes(search_query.toLowerCase()) 
+              // ...and the type matches the selected type...
+              && (document.getElementById("type").value == 0 || 
+                  parseInt(cards[i].querySelector('.card-text:nth-child(2)').innerText) == parseInt(document.getElementById("type").value))
+              ) {
+                // ...remove the `.is-hidden` class.
+                cards[i].classList.remove("is-hidden");
+            } else {
+              // Otherwise, add the class.
+              cards[i].classList.add("is-hidden");
+            }
+          }
+      }
+
+      //A little delay
+      let typingTimer;               
+      let typeInterval = 500;  
+      let searchInput = document.getElementById('searchBar');
+      let typeSelect = document.getElementById('type');
+
+      searchInput.addEventListener('keyup', () => {
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(liveSearch, typeInterval);
+      });
+
+      typeSelect.addEventListener('change', () => {
+          liveSearch();
+      });
+
+  }
 
 
 
