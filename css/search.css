@@ -30,8 +30,8 @@ img {
   display: inline-flex;
 }
 .active {
-  color: #ffffff;
-  background-color: #1b95ff;
+  color: #ffffff!important;
+  background-color: #1b95ff!important;
 }
 
 .page-btn {

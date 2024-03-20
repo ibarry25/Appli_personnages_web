@@ -6,12 +6,11 @@ export default class PersonnageAll {
     async render() {
 
         // Fetching des données
-        let personnages = await PersoProvider.fetchPerso(50);
         let types = await TypeProvider.fetchType();
 
         // calculation pour la pagination
         let persoParPage = 3;
-        let nbPage = Math.ceil(personnages.length / persoParPage);
+        let nbPage = Math.ceil(7 / persoParPage);
 
 
         // Création du contenue html
@@ -23,17 +22,7 @@ export default class PersonnageAll {
                 ).join('\n ');
 
 
-        let html = personnages.map(perso =>
-            /*html*/`
-                <div class="card col-md-2">
-                    <strong class="card-text">${perso.nom}</strong>
-                    <span class="card-text is-hidden">${perso.types_personnage.id}</span>
-                    <img src="${perso.image}" class="card-img" alt="..." loading="lazy">
-                    <div class="card-img-overlay">
-                    </div>
-                </div>
-            `
-        ).join('\n ');
+
 
         let pagination = Array.from({ length: nbPage }, (_, i) => i + 1).map(page =>
             /*html*/`
@@ -52,6 +41,7 @@ export default class PersonnageAll {
             <h1>wiki viewer</h1>
             <div class="form col-xs-12">   
                 <input class="col-xs-9" id="searchBar" type="text" placeholder="search" "/>
+                <button class="col-xs-3" type="text" id="boutonRecherche">search</button>
                 <select class="col-xs-3" id="type" name="type">
                     <option value="0">Tous les types</option>
                     ${options}
@@ -62,16 +52,12 @@ export default class PersonnageAll {
           
 
 
-          <div class="row gap-2  ">
-          ${html}
-          </div>
+          <div id="personnages" class="row gap-2 "></div>
 
           <div class="pagination">
             <span class="page-btn page-step" data-shown="0">&laquo;</span>
 
             ${pagination}
-
-            <!-- Page numbers -->
 
             <span class="page-btn page-step" data-shown="5">&raquo;</span>
             <!-- Next -->
@@ -85,89 +71,110 @@ export default class PersonnageAll {
     
     async afterRender() {
 
-      function liveSearch() {
-          // Locate the card elements
-          let cards = document.querySelectorAll('.card')
-          // Locate the search input
-          let search_query = document.getElementById("searchBar").value;
-          console.log(search_query);
-          // Loop through the cards
-          for (var i = 0; i < cards.length; i++) {
-            // If the text is within the card...
-            if(cards[i].innerText.toLowerCase()
-              // ...and the text matches the search query...
-              .includes(search_query.toLowerCase()) 
-              // ...and the type matches the selected type...
-              && (document.getElementById("type").value == 0 || 
-                  parseInt(cards[i].querySelector('.card-text:nth-child(2)').innerText) == parseInt(document.getElementById("type").value))
-              ) {
-                // ...remove the `.is-hidden` class.
-                cards[i].classList.remove("is-hidden");
-            } else {
-              // Otherwise, add the class.
-              cards[i].classList.add("is-hidden");
-            }
-          }
+      let personnages = await PersoProvider.fetchPerso(50);
+
+      function createCard(perso) {
+        return /*html*/`
+        <div class="card col-md-2">
+          <strong class="card-text">${perso.nom}</strong>
+          <span class="card-text is-hidden">${perso.types_personnage.id}</span>
+          <img src="${perso.image}" class="card-img" alt="..." loading="lazy">
+          <div class="card-img-overlay"></div>
+        </div>
+        `;
       }
 
 
+      function liveSearch(personnages) {
+
+        let listPerso = [];
+
+          // Locate the search input
+          let search_query = document.getElementById("searchBar").value;
+          console.log(search_query);
+          // Loop through the personnages
+          personnages.forEach(perso => {
+        // If the name matches the search query...
+        if(perso.nom.toLowerCase().includes(search_query.toLowerCase()) 
+          // ...and the type matches the selected type...
+          && (document.getElementById("type").value == 0 || 
+          perso.types_personnage.id == parseInt(document.getElementById("type").value))
+          ) {
+            // ...add the perso to the list.
+            listPerso.push(perso);
+            // ...remove the `.is-hidden` class.
+            // document.getElementById(`perso-${perso.id}`).classList.remove("is-hidden");
+        } else {
+          // Otherwise, add the class.
+          // document.getElementById(`perso-${perso.id}`).classList.add("is-hidden");
+        }
+          })
+          // Return the list of personnages
+          return listPerso;
+      }
+
+      function showInPage(personnages, persoParPage=3) {
+
+        
+              function afficherPage(page,personnages, persoParPage) {
+                let start = (page - 1) * persoParPage;
+                let end = start + persoParPage;
+                document.getElementById('personnages').innerHTML = personnages.slice(
+                  start,end).map(
+                    perso => createCard(perso)
+                  ).join('\n');
+              }
+                
+              // Pagination
+
+              let lesBoutons = document.querySelectorAll('.page-btn');
+
+              lesBoutons.forEach(bouton => {
+                bouton.addEventListener('click', () => {
+                    let page = parseInt(bouton.innerText);
+                    console.log(page);
+                    afficherPage(page,personnages,persoParPage);
+
+                });
+
+                // affiche la 1er page par defaut
+                afficherPage(1,personnages,persoParPage);
+                
+            });
+      
+
+
+        
+      }
+
       //A little delay
-      let typingTimer;               
-      let typeInterval = 500;  
+      let typingTimer;
+      let typeInterval = 250;  
       let searchInput = document.getElementById('searchBar');
+      let searchButton = document.getElementById('boutonRecherche');
       let typeSelect = document.getElementById('type');
 
-      searchInput.addEventListener('keyup', () => {
+      if (searchInput.value.trim() === '' && typeSelect.value === '0') {
+          showInPage(personnages);
+          // ajoute la classe active au bouton 1 en actif
+          document.getElementById('page-1').classList.add('active');
+      }
+
+      searchButton.addEventListener('click', () => {
           clearTimeout(typingTimer);
-          typingTimer = setTimeout(liveSearch, typeInterval);
+          typingTimer = setTimeout(() => {
+              showInPage(liveSearch(personnages));
+          }, typeInterval);
       });
 
       typeSelect.addEventListener('change', () => {
-          liveSearch();
+          showInPage(liveSearch(personnages));
       });
 
 
-      // Pagination
-
-      let lesBoutons = document.querySelectorAll('.page-btn');
-      let pageActive = 1;
-      let persoParPage = 3;
-
-      lesBoutons.forEach(bouton => {
-          bouton.addEventListener('click', () => {
-              let page = parseInt(bouton.innerText);
-              // Si le bouton est un bouton de déplacement
-              if (bouton.classList.contains('page-step')) {
-                  page = pageActive + parseInt(bouton.dataset.shown);
-              }
-              if (page < 1) {
-                // Si on est à la première page, on ne peut pas aller plus bas
-                  page = 1;
-              }
-              if (page > lesBoutons.length) {
-                // Si on est à la dernière page, on ne peut pas aller plus loin  
-                page = lesBoutons.length;
-              }
-              showPage(page);
-              pageActive = page;
-              // On ajoute la classe active au bouton actif 
-          });
-      
-      });
 
 
-      function showPage(page) {
-        let start = (page - 1) * persoParPage;
-        let end = start + persoParPage;
-        let cards = document.querySelectorAll('.card');
-        cards.forEach((card, index) => {
-            if (index >= start && index < end) {
-                card.classList.remove('is-hidden');
-            } else {
-                card.classList.add('is-hidden');
-            }
-        });
-    }
+
 
 
   }
