@@ -9,6 +9,11 @@ export default class PersonnageAll {
         let personnages = await PersoProvider.fetchPerso(50);
         let types = await TypeProvider.fetchType();
 
+        // calculation pour la pagination
+        let persoParPage = 3;
+        let nbPage = Math.ceil(personnages.length / persoParPage);
+
+
         // Création du contenue html
 
         let options = types.map(type =>
@@ -29,6 +34,15 @@ export default class PersonnageAll {
                 </div>
             `
         ).join('\n ');
+
+        let pagination = Array.from({ length: nbPage }, (_, i) => i + 1).map(page =>
+            /*html*/`
+              <span id="page-${page}" class="page-btn">${page}</span>
+          `
+            ).join('\n ');
+
+
+
 
         return /*html*/`
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -51,6 +65,17 @@ export default class PersonnageAll {
           <div class="row gap-2  ">
           ${html}
           </div>
+
+          <div class="pagination">
+            <span class="page-btn page-step" data-shown="0">&laquo;</span>
+
+            ${pagination}
+
+            <!-- Page numbers -->
+
+            <span class="page-btn page-step" data-shown="5">&raquo;</span>
+            <!-- Next -->
+            </div>
           
         </div>
           
@@ -85,6 +110,7 @@ export default class PersonnageAll {
           }
       }
 
+
       //A little delay
       let typingTimer;               
       let typeInterval = 500;  
@@ -100,8 +126,53 @@ export default class PersonnageAll {
           liveSearch();
       });
 
+
+      // Pagination
+
+      let lesBoutons = document.querySelectorAll('.page-btn');
+      let pageActive = 1;
+      let persoParPage = 3;
+
+      lesBoutons.forEach(bouton => {
+          bouton.addEventListener('click', () => {
+              let page = parseInt(bouton.innerText);
+              // Si le bouton est un bouton de déplacement
+              if (bouton.classList.contains('page-step')) {
+                  page = pageActive + parseInt(bouton.dataset.shown);
+              }
+              if (page < 1) {
+                // Si on est à la première page, on ne peut pas aller plus bas
+                  page = 1;
+              }
+              if (page > lesBoutons.length) {
+                // Si on est à la dernière page, on ne peut pas aller plus loin  
+                page = lesBoutons.length;
+              }
+              showPage(page);
+              pageActive = page;
+              // On ajoute la classe active au bouton actif 
+          });
+      
+      });
+
+
+      function showPage(page) {
+        let start = (page - 1) * persoParPage;
+        let end = start + persoParPage;
+        let cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            if (index >= start && index < end) {
+                card.classList.remove('is-hidden');
+            } else {
+                card.classList.add('is-hidden');
+            }
+        });
+    }
+
+
   }
 
 
 
 }
+
