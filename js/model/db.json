@@ -53,6 +53,60 @@
       },
       "description": "Jon Snow est un personnage principal de la série télévisée Game of Thrones. Il est membre de la Garde de Nuit et est souvent impliqué dans les intrigues politiques et militaires de Westeros.",
       "image": "../../img/jon_snow.png"
+    },
+    {
+      "id_personnage": 7,
+      "nom": "Darth Vader",
+      "types_personnage": {
+        "id": 2
+      },
+      "description": "Darth Vader est l'un des méchants les plus emblématiques de la saga Star Wars. Autrefois connu sous le nom d'Anakin Skywalker, il est devenu un Seigneur Sith après avoir été corrompu par le Côté Obscur de la Force.",
+      "image": "../../img/darth_vader.png"
+    },
+    {
+      "id_personnage": 8,
+      "nom": "Geralt de Riv",
+      "types_personnage": {
+        "id": 1
+      },
+      "description": "Geralt de Riv est le protagoniste principal de la série de jeux vidéo The Witcher. Il est un sorceleur, un chasseur de monstres professionnel, et est souvent impliqué dans des quêtes périlleuses et des intrigues politiques.",
+      "image": "../../img/geralt_de_riv.png"
+    },
+    {
+      "id_personnage": 9,
+      "nom": "Ellie",
+      "types_personnage": {
+        "id": 1
+      },
+      "description": "Ellie est l'un des personnages principaux de la série de jeux vidéo The Last of Us. Elle est une jeune fille immunisée contre un virus mortel et est souvent accompagnée de Joel, un survivant endurci, dans un monde post-apocalyptique.",
+      "image": "../../img/ellie.png"
+    },
+    {
+      "id_personnage": 10,
+      "nom": "Walter White",
+      "types_personnage": {
+        "id": 3
+      },
+      "description": "Walter White est le personnage principal de la série télévisée Breaking Bad. Il est un professeur de chimie devenu fabricant de méthamphétamine et est souvent impliqué dans des activités criminelles pour subvenir aux besoins de sa famille.",
+      "image": "../../img/walter_white.png"
+    },
+    {
+      "id_personnage": 11,
+      "nom": "Nathan Drake",
+      "types_personnage": {
+        "id": 1
+      },
+      "description": "Nathan Drake est le protagoniste principal de la série de jeux vidéo Uncharted. Il est un chasseur de trésors intrépide et est souvent impliqué dans des aventures périlleuses à travers le monde.",
+      "image": "../../img/nathan_drake.png"
+    },
+    {
+      "id_personnage": 12,
+      "nom": "Tony Stark",
+      "types_personnage": {
+        "id": 2
+      },
+      "description": "Tony Stark est le milliardaire philanthrope derrière l'identité secrète d'Iron",
+      "image": "../../img/tony_stark.png"
     }
   ],
   "types_personnage": [

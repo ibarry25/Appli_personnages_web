@@ -8,11 +8,6 @@ export default class PersonnageAll {
         // Fetching des données
         let types = await TypeProvider.fetchType();
 
-        // calculation pour la pagination
-        let persoParPage = 3;
-        let nbPage = Math.ceil(7 / persoParPage);
-
-
         // Création du contenue html
 
         let options = types.map(type =>
@@ -24,11 +19,7 @@ export default class PersonnageAll {
 
 
 
-        let pagination = Array.from({ length: nbPage }, (_, i) => i + 1).map(page =>
-            /*html*/`
-              <span id="page-${page}" class="page-btn">${page}</span>
-          `
-            ).join('\n ');
+
 
 
 
@@ -42,7 +33,7 @@ export default class PersonnageAll {
             <div class="form col-xs-12">   
                 <input class="col-xs-9" id="searchBar" type="text" placeholder="search" "/>
                 <button class="col-xs-3" type="text" id="boutonRecherche">search</button>
-                <select class="col-xs-3" id="type" name="type">
+                <select class="form-select" id="type" name="type">
                     <option value="0">Tous les types</option>
                     ${options}
                 </select>
@@ -52,16 +43,15 @@ export default class PersonnageAll {
           
 
 
-          <div id="personnages" class="row gap-2 "></div>
+          <div id="personnages" class="row gap-2 mt-5"></div>
 
           <div class="pagination">
             <span class="page-btn page-step" data-shown="0">&laquo;</span>
 
-            ${pagination}
+            <div id="boutPagination" "> </div>
 
-            <span class="page-btn page-step" data-shown="5">&raquo;</span>
-            <!-- Next -->
-            </div>
+              <span class="page-btn page-step ml-1" data-shown="-1">&raquo;</span>
+          </div>
           
         </div>
           
@@ -75,7 +65,7 @@ export default class PersonnageAll {
 
       function createCard(perso) {
         return /*html*/`
-        <div class="card col-md-2">
+        <div class="card col-md-2 mx-auto">
           <strong class="card-text">${perso.nom}</strong>
           <span class="card-text is-hidden">${perso.types_personnage.id}</span>
           <img src="${perso.image}" class="card-img" alt="..." loading="lazy">
@@ -102,12 +92,7 @@ export default class PersonnageAll {
           ) {
             // ...add the perso to the list.
             listPerso.push(perso);
-            // ...remove the `.is-hidden` class.
-            // document.getElementById(`perso-${perso.id}`).classList.remove("is-hidden");
-        } else {
-          // Otherwise, add the class.
-          // document.getElementById(`perso-${perso.id}`).classList.add("is-hidden");
-        }
+        } 
           })
           // Return the list of personnages
           return listPerso;
@@ -119,37 +104,89 @@ export default class PersonnageAll {
               function afficherPage(page,personnages, persoParPage) {
                 let start = (page - 1) * persoParPage;
                 let end = start + persoParPage;
+
                 document.getElementById('personnages').innerHTML = personnages.slice(
                   start,end).map(
                     perso => createCard(perso)
                   ).join('\n');
+                
+                  document.getElementById("page-"+page).classList.add('active');
+            
+              }
+
+              function afficheBoutonPagination(nbPage){
+                // Placement des boutons pour la pagination
+
+                let pagination = Array.from({ length: nbPage }, (_, i) => i + 1).map(page =>
+                  /*html*/`
+                    <span id="page-${page}" class="page-btn">${page}</span>
+                `
+                  ).join('\n ');
+
+                  document.getElementById("boutPagination").innerHTML = pagination;
+              }
+
+              function activerButton(nbPage){
+
+                let lesBoutons = document.querySelectorAll('.page-btn');
+                let BoutonEnd =  document.querySelectorAll('.page-step');
+
+                lesBoutons.forEach(bouton => {
+                  bouton.addEventListener('click', () => {
+                      let page = parseInt(bouton.innerText);
+                      console.log(page);
+                      afficherPage(page,personnages,persoParPage);
+                      // Supprimer la classe active de tous les boutons
+                      lesBoutons.forEach(btn => btn.classList.remove('active'));
+                    document.getElementById("page-"+page).classList.add('active');
+                      
+  
+                  });
+
+                });
+
+
+                // Go to 1er page
+                BoutonEnd[0].addEventListener('click',()=>{
+                  // Supprimer la classe active de tous les boutons
+                  lesBoutons.forEach(btn => btn.classList.remove('active'));
+                  afficherPage(1, personnages, persoParPage);
+
+                })
+
+                BoutonEnd[1].addEventListener('click',()=>{
+                  // Supprimer la classe active de tous les boutons
+                  lesBoutons.forEach(btn => btn.classList.remove('active'));
+                  afficherPage(nbPage, personnages, persoParPage);
+
+                })
+
               }
                 
               // Pagination
 
-              let lesBoutons = document.querySelectorAll('.page-btn');
 
-              lesBoutons.forEach(bouton => {
-                bouton.addEventListener('click', () => {
-                    let page = parseInt(bouton.innerText);
-                    console.log(page);
-                    afficherPage(page,personnages,persoParPage);
+              let nbPage = Math.ceil(personnages.length / persoParPage);
 
-                });
+              afficheBoutonPagination(nbPage);
+
+                // Activer les boutons
+
+                activerButton(nbPage)
 
                 // affiche la 1er page par defaut
                 afficherPage(1,personnages,persoParPage);
                 
-            });
+            
       
-
-
-        
+          
       }
+        
+      
 
       //A little delay
       let typingTimer;
-      let typeInterval = 250;  
+      let typeInterval = 100;  
       let searchInput = document.getElementById('searchBar');
       let searchButton = document.getElementById('boutonRecherche');
       let typeSelect = document.getElementById('type');
