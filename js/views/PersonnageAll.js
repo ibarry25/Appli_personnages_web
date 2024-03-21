@@ -17,22 +17,14 @@ export default class PersonnageAll {
                 ).join('\n ');
 
 
-
-
-
-
-
-
-
         return /*html*/`
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          
 
           <form class="container text-center" id="searchBox"  >
             <h1>wiki viewer</h1>
             <div class="form col-xs-12">   
                 <input class="col-xs-9" id="searchBar" type="text" placeholder="search" "/>
-                <button class="col-xs-3" type="text" id="boutonRecherche">search</button>
+                <button class="col-xs-3" type="button" id="boutonRecherche">search</button>
                 <select class="form-select" id="type" name="type">
                     <option value="0">Tous les types</option>
                     ${options}
@@ -68,7 +60,7 @@ export default class PersonnageAll {
         <div class="card col-md-2 mx-auto">
           <strong class="card-text">${perso.nom}</strong>
           <span class="card-text is-hidden">${perso.types_personnage.id}</span>
-          <img src="${perso.image}" class="card-img" alt="..." loading="lazy">
+          <img src="../../img/${perso.image}" class="card-img" alt="..." loading="lazy">
           <div class="card-img-overlay"></div>
         </div>
         `;
@@ -81,25 +73,26 @@ export default class PersonnageAll {
 
           // Locate the search input
           let search_query = document.getElementById("searchBar").value;
+          let type = parseInt(document.getElementById("type").value);
+          console.log(type);
           console.log(search_query);
           // Loop through the personnages
           personnages.forEach(perso => {
-        // If the name matches the search query...
-        if(perso.nom.toLowerCase().includes(search_query.toLowerCase()) 
-          // ...and the type matches the selected type...
-          && (document.getElementById("type").value == 0 || 
-          perso.types_personnage.id == parseInt(document.getElementById("type").value))
-          ) {
-            // ...add the perso to the list.
-            listPerso.push(perso);
-        } 
+            // If the name matches the search query...
+            if(perso.nom.toLowerCase().includes(search_query.toLowerCase()) 
+              // ...and the type matches the selected type...
+              && (document.getElementById("type").value == 0 || 
+              perso.types_personnage.id == type)
+              ) {
+                // ...add the perso to the list.
+                listPerso.push(perso);
+            } 
           })
           // Return the list of personnages
           return listPerso;
       }
 
       function showInPage(personnages, persoParPage=3) {
-
         
               function afficherPage(page,personnages, persoParPage) {
                 let start = (page - 1) * persoParPage;
@@ -110,9 +103,43 @@ export default class PersonnageAll {
                     perso => createCard(perso)
                   ).join('\n');
 
-                  // document.getElementById('page-'+page).classList.add('active');
+                // si c'est vide on affiche un message "aucun résultat"
+                if (personnages.length === 0) {
+                  document.getElementById('personnages').innerHTML = /*html*/`
+                    <div class="col fs-1 mx-auto not-found">
+                      <p>Aucun résultat</p>
+                    </div>
+                  `;
+                }
+
+
+                  // Afficher les boutons de pagination
+                  let nbPageMax = Math.ceil(personnages.length / persoParPage);
+
+                  if (nbPageMax > 5) {
+                    afficheBoutonPagination2(page, nbPageMax);
+                  } 
                 
               }
+
+              function afficheBoutonPagination2(page, nbPageMax){
+                // Afficher les 2 derniers boutons de la pagination et les 2 prochains si besoin
+                let pagination = Array.from([page - 2, page - 1, page, page + 1, page + 2]).filter(
+                  p => p > 0 && p <= nbPageMax
+                ).map(p =>
+                  /*html*/`
+                    <span id="page-${p}" class="page-btn">${p}</span>
+                `).join('\n ');
+
+                document.getElementById("boutPagination").innerHTML = pagination;
+                document.getElementById('page-'+page).classList.add('active');
+
+                // Activer les boutons
+                activerButton(nbPageMax);
+
+
+              } 
+
 
               function afficheBoutonPagination(nbPage){
                 // Placement des boutons pour la pagination
@@ -171,17 +198,15 @@ export default class PersonnageAll {
                 
               // Pagination
 
-
               let nbPage = Math.ceil(personnages.length / persoParPage);
 
               afficheBoutonPagination(nbPage);
 
-                // Activer les boutons
+              // Activer les boutons
+              activerButton(nbPage)
 
-                activerButton(nbPage)
-
-                // affiche la 1er page par defaut
-                afficherPage(1,personnages,persoParPage);
+              // affiche la 1er page par defaut
+              afficherPage(1,personnages,persoParPage);
                 
             
       
