@@ -109,9 +109,9 @@ export default class PersonnageAll {
                   start,end).map(
                     perso => createCard(perso)
                   ).join('\n');
+
+                  // document.getElementById('page-'+page).classList.add('active');
                 
-                  document.getElementById("page-"+page).classList.add('active');
-            
               }
 
               function afficheBoutonPagination(nbPage){
@@ -138,7 +138,10 @@ export default class PersonnageAll {
                       afficherPage(page,personnages,persoParPage);
                       // Supprimer la classe active de tous les boutons
                       lesBoutons.forEach(btn => btn.classList.remove('active'));
-                    document.getElementById("page-"+page).classList.add('active');
+                      
+                    if (!isNaN(page)) {
+                      bouton.classList.add('active');
+                    }
                       
   
                   });
@@ -152,6 +155,8 @@ export default class PersonnageAll {
                   lesBoutons.forEach(btn => btn.classList.remove('active'));
                   afficherPage(1, personnages, persoParPage);
 
+                  document.getElementById('page-1').classList.add('active');
+
                 })
 
                 BoutonEnd[1].addEventListener('click',()=>{
@@ -159,6 +164,7 @@ export default class PersonnageAll {
                   lesBoutons.forEach(btn => btn.classList.remove('active'));
                   afficherPage(nbPage, personnages, persoParPage);
 
+                  document.getElementById('page-'+nbPage).classList.add('active');
                 })
 
               }
