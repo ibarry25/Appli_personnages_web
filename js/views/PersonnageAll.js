@@ -1,5 +1,6 @@
 import PersoProvider from '../model/service/PersoProvider.js';
 import TypeProvider from '../model/service/TypeProvider.js';
+import { PERSOPARPAGE } from '../config.js';
 
 export default class PersonnageAll {
 
@@ -48,7 +49,9 @@ export default class PersonnageAll {
           <div class="pagination">
             <span class="page-btn page-step" data-shown="0">&laquo;</span>
 
-            <div id="boutPagination" "> </div>
+            <div id="boutPagination" ">
+              <span id="page-" class="page-btn"></span>
+            </div>
 
               <span class="page-btn page-step ml-1" data-shown="-1">&raquo;</span>
           </div>
@@ -84,104 +87,72 @@ export default class PersonnageAll {
           console.log(search_query);
           // Loop through the personnages
           personnages.forEach(perso => {
-        // If the name matches the search query...
-        if(perso.nom.toLowerCase().includes(search_query.toLowerCase()) 
-          // ...and the type matches the selected type...
-          && (document.getElementById("type").value == 0 || 
-          perso.types_personnage.id == parseInt(document.getElementById("type").value))
-          ) {
-            // ...add the perso to the list.
-            listPerso.push(perso);
-        } 
+            // If the name matches the search query...
+            if(perso.nom.toLowerCase().includes(search_query.toLowerCase()) 
+              // ...and the type matches the selected type...
+              && (document.getElementById("type").value == 0 || 
+              perso.types_personnage.id == parseInt(document.getElementById("type").value))
+              ) {
+                // ...add the perso to the list.
+                listPerso.push(perso);
+            } 
           })
           // Return the list of personnages
           return listPerso;
       }
 
-      function showInPage(personnages, persoParPage=3) {
+      function showInPage(personnages, persoParPage=PERSOPARPAGE) {
 
         
-              function afficherPage(page,personnages, persoParPage) {
+              function afficherPage(personnages, persoParPage, direction=null) {
+
+                // Calcul du nombre de page
+                let nbPage = Math.ceil(personnages.length / persoParPage);
+
+                let bouton = document.getElementById('page-');
+                let page = parseInt(bouton.innerText) + (direction == null ? 0 : direction);
+
+                if (page < 1) page = nbPage;
+                if (page > nbPage) page = 1;
+
                 let start = (page - 1) * persoParPage;
                 let end = start + persoParPage;
 
                 document.getElementById('personnages').innerHTML = personnages.slice(
-                  start,end).map(
+                  start, end).map(
                     perso => createCard(perso)
                   ).join('\n');
 
-                  // document.getElementById('page-'+page).classList.add('active');
+                document.getElementById('page-').innerText = page;
+
                 
               }
 
-              function afficheBoutonPagination(nbPage){
-                // Placement des boutons pour la pagination
-
-                let pagination = Array.from({ length: nbPage }, (_, i) => i + 1).map(page =>
-                  /*html*/`
-                    <span id="page-${page}" class="page-btn">${page}</span>
-                `
-                  ).join('\n ');
-
-                  document.getElementById("boutPagination").innerHTML = pagination;
-              }
-
-              function activerButton(nbPage){
-
-                let lesBoutons = document.querySelectorAll('.page-btn');
                 let BoutonEnd =  document.querySelectorAll('.page-step');
-
-                lesBoutons.forEach(bouton => {
-                  bouton.addEventListener('click', () => {
-                      let page = parseInt(bouton.innerText);
-                      console.log(page);
-                      afficherPage(page,personnages,persoParPage);
-                      // Supprimer la classe active de tous les boutons
-                      lesBoutons.forEach(btn => btn.classList.remove('active'));
-                      
-                    if (!isNaN(page)) {
-                      bouton.classList.add('active');
-                    }
-                      
-  
-                  });
-
-                });
-
-
+                
                 // Go to 1er page
                 BoutonEnd[0].addEventListener('click',()=>{
                   // Supprimer la classe active de tous les boutons
-                  lesBoutons.forEach(btn => btn.classList.remove('active'));
-                  afficherPage(1, personnages, persoParPage);
+                  afficherPage( personnages, persoParPage, -1);
 
-                  document.getElementById('page-1').classList.add('active');
 
                 })
 
                 BoutonEnd[1].addEventListener('click',()=>{
                   // Supprimer la classe active de tous les boutons
-                  lesBoutons.forEach(btn => btn.classList.remove('active'));
-                  afficherPage(nbPage, personnages, persoParPage);
+                  afficherPage( personnages, persoParPage, 1);
 
-                  document.getElementById('page-'+nbPage).classList.add('active');
                 })
 
-              }
-                
+              
               // Pagination
 
 
-              let nbPage = Math.ceil(personnages.length / persoParPage);
+              document.getElementById('page-').innerText = 1;
 
-              afficheBoutonPagination(nbPage);
 
-                // Activer les boutons
-
-                activerButton(nbPage)
-
-                // affiche la 1er page par defaut
-                afficherPage(1,personnages,persoParPage);
+              // affiche la 1er page par defaut
+              afficherPage(personnages,persoParPage);
                 
             
       
@@ -200,7 +171,7 @@ export default class PersonnageAll {
       if (searchInput.value.trim() === '' && typeSelect.value === '0') {
           showInPage(personnages);
           // ajoute la classe active au bouton 1 en actif
-          document.getElementById('page-1').classList.add('active');
+          // document.getElementById('page-1').classList.add('active');
       }
 
       searchButton.addEventListener('click', () => {
