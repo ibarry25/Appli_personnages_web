@@ -1,5 +1,6 @@
 .card {
   margin-bottom: 20px;
+  position: relative;
 }
 .card-img-overlay {
   background-color: rgba(0, 0, 0, 0.5);
@@ -70,4 +71,19 @@ img {
 
 img{
   object-fit: contain;
+}
+
+.hidden-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 1.5em;
+  color: black;
+}
+
+.card:hover .hidden-link {
+  opacity: 1;
 }
