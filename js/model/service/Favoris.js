@@ -2,23 +2,26 @@ class MesFavoris {
 
 
 
-    static getFavoris() {
-        if (localStorage.getItem('favoris') === null) {
-            localStorage.setItem('favoris', JSON.stringify([]));
-        }
-        return JSON.parse(localStorage.getItem('favoris'));
+    static getFavoris()  {
+        return JSON.parse(localStorage.getItem('favoris')) || [];
     }
 
     static addFavoris(id) {
-        let favoris = this.getFavoris();
-        favoris.push(id);
+        let favoris = MesFavoris.getFavoris();
+        let ensFav = Set(favoris);
+        ensFav.add(id);
         localStorage.setItem('favoris', JSON.stringify(favoris));
+        console.log(MesFavoris.getFavoris());
     }
 
     static deleteFavoris(id) {
-        let favoris = this.getFavoris();
+        let favoris = MesFavoris.getFavoris();
         let index = favoris.indexOf(id);
         favoris.splice(index, 1);
         localStorage.setItem('favoris', JSON.stringify(favoris));
+        console.log(MesFavoris.getFavoris());
+
     }
 }
+
+export default MesFavoris;
