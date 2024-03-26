@@ -1,0 +1,89 @@
+.card {
+  margin-bottom: 20px;
+  position: relative;
+}
+.card-img-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.card-title {
+  color: blue;
+}
+
+img {
+  width: 10vw;
+  height: 10vw;
+}
+
+.is-hidden{
+  display: none;
+}
+
+
+.pagination {
+  width: 100%;
+  padding: 0 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.pagination:not(:has(.page-btn:target)) .page-step[data-shown="0"] {
+  display: inline-flex;
+}
+.active {
+  color: #ffffff!important;
+  background-color: #1b95ff!important;
+}
+
+.page-btn {
+  color: #000000;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.25rem;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+}
+.page-btn:last-child {
+  margin-right: 0;
+}
+.page-btn:is(span) {
+  text-decoration: none;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 128ms ease-out, background-color 128ms ease-out;
+}
+.page-btn:is(span):hover {
+  color: #ffffff;
+  background-color: #dfdfdf;
+}
+
+.page-btn:is(span):target {
+  color: #ffffff;
+  background-color: #1b95ff;
+}
+
+.page-num {
+  display: none;
+}
+
+img{
+  object-fit: contain;
+}
+
+.hidden-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 1.5em;
+  color: black;
+}
+
+.card:hover .hidden-link {
+  opacity: 1;
+}
