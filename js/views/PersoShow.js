@@ -1,21 +1,27 @@
 import Utils from '../model/service/Utils.js';
 import PersoProvider from '../model/service/PersoProvider.js';
+import TypeProvider from '../model/service/TypeProvider.js';
 
 
 export default class PersoShow {
     async render () {
         let request = Utils.parseRequestURL()
         console.log('request', request)
-        const perso = await PersoProvider.getPerso(request.id)
-        const personnage = perso[0]
-         return /*html*/`
+        const personnage = await PersoProvider.getPerso(request.id)
+        const perso = personnage[0]
+        const type = await TypeProvider.fetchTypeById(perso.types_personnage.id)
+        
+
+        return /*html*/`
             <section class="section">
-                <p> Nom : ${personnage.nom} </p>
-                <p> Description : ${personnage.description} </p>
+                <p> Nom : ${perso.nom} </p>
+                <p> Description : ${perso.description}</p>
+                <p> Type : ${type[0].nom}</p>
             </section>
             <p><a href="/">Retour à l'accueil</a></p>
             <p><a href="#/personnages">Retour à la liste des personnages</a></p>
         `
+        
     }
 
     // async after_render() {
