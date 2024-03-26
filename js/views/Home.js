@@ -36,7 +36,7 @@ export default class Home {
                 </div>
             </section>
             <h2>Les personnages</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 perso">
                 ${html}
             </div>
         `;

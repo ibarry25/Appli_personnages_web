@@ -233,5 +233,12 @@
         "id_user": 5,
         "note": 1
     }
-]
+  ],
+  "users": [
+    {
+      "id": 1,
+      "nom": "Alice",
+      "prenom": "Dupont"
+    }
+    ]
 }
