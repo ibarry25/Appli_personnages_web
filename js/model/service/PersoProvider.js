@@ -27,7 +27,7 @@ export default class PersoProvider {
            }
        };
        try {
-           const response = await fetch(`${ENDPOINT}/` + id, options)
+           const response = await fetch(`${ENDPOINT}?id_personnage=` + id, options)
            const json = await response.json();
            return json
        } catch (err) {

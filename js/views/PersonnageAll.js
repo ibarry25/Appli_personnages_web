@@ -67,6 +67,8 @@ export default class PersonnageAll {
       }
 
 
+
+
       function liveSearch(personnages) {
 
         let listPerso = [];
