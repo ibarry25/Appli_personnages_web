@@ -12,9 +12,9 @@ export default class Home {
                     <p class="card-text">${perso.description ? perso.description.slice(0, 100) : ''}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        <a href="#/personnages/${perso.id}" class="btn btn-sm btn-outline-secondary">+ détail sur ${perso.nom}</a>
+                        <a href="#/personnages/${perso.id_personnage}" class="btn btn-sm btn-outline-secondary">+ détail sur ${perso.nom}</a>
                         </div>
-                        <small class="text-body-secondary">${perso.id}</small>
+                        <small class="text-body-secondary">${perso.id_personnage}</small>
                     </div>
                 </div>
             </div>
