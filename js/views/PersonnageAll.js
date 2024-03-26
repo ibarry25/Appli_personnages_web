@@ -58,13 +58,16 @@ export default class PersonnageAll {
       function createCard(perso) {
         return /*html*/`
         <div class="card col-md-2 mx-auto">
-          <strong class="card-text">${perso.nom}</strong>
-          <span class="card-text is-hidden">${perso.types_personnage.id}</span>
-          <img src="../../img/${perso.image}" class="card-img" alt="..." loading="lazy">
-          <div class="card-img-overlay"></div>
+            <strong class="card-text">${perso.nom}</strong>
+            <span class="card-text is-hidden">${perso.types_personnage.id}</span>
+            <img src="../../img/${perso.image}" class="card-img" alt="..." loading="lazy">
+            <div class="card-img-overlay">
+                <a class="hidden-link" href="#/personnages/${perso.id_personnage}">Voir plus</a>
+            </div>
         </div>
         `;
-      }
+    }
+    
 
 
 
