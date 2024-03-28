@@ -1,0 +1,32 @@
+/* Styles spécifiques pour la section */
+.section {
+    background-color: #dae9ed;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrer le contenu horizontalement */
+}
+
+.section p {
+    margin: 10px 0;
+}
+
+.section img {
+    max-width: 100%; /* Pour s'assurer que l'image ne dépasse pas la largeur de la section */
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 20px auto; /* Centrer l'image verticalement et horizontalement */
+}
+
+.section a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.section a:hover {
+    text-decoration: underline;
+}

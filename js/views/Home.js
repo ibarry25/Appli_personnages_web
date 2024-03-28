@@ -27,7 +27,7 @@ export default class Home {
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <h1 class="fw-light">Personnages</h1>
-                        <p class="lead text-body-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, aliquid voluptas sit aperiam quis architecto quaerat vel ratione placeat delectus repellendus cum animi sequi amet corporis minima ab, nisi at!</p>
+                        <p class="lead text-body-secondary">Découvrez nos personnages favoris issus de différens médias comme le cinéma et les jeux vidéos.</p>
                         <p>
                             <a href="" class="btn btn-primary my-2">Main call to action</a>
                             <a href="" class="btn btn-secondary my-2">Secondary action</a>
