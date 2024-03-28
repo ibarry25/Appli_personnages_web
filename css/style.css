@@ -218,3 +218,14 @@
   opacity:0.2;
 }
 
+.imgHome{
+  margin-top: 2vw;
+  max-width: 16vw;
+}
+
+@media (min-width: 768px) {
+  .col-md-2{
+    max-width: 100vw!important;
+    height: 50vh;
+  }
+}

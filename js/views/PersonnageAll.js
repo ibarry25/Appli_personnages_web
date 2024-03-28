@@ -35,7 +35,7 @@ export default class PersonnageAll {
           
 
 
-          <div id="personnages" class="row gap-2 mt-5"></div>
+          <div id="personnages" class=" gap-2 mt-5"></div>
 
           <div class="pagination">
             <span class="page-btn page-step" data-shown="0">&laquo;</span>
@@ -57,7 +57,7 @@ export default class PersonnageAll {
 
       function createCard(perso) {
         return /*html*/`
-        <div class="card col-md-2 mx-auto">
+        <div class="card col-md-2 ">
             <strong class="card-text">${perso.nom}</strong>
             <span class="card-text is-hidden">${perso.types_personnage.id}</span>
             <img src="../../img/${perso.image}" class="card-img" alt="..." loading="lazy">
@@ -68,7 +68,6 @@ export default class PersonnageAll {
         `;
     }
     
-
 
 
 

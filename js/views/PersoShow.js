@@ -1,5 +1,5 @@
 import Utils from '../model/service/Utils.js';
-import MesFavoris from '../model/service/Favoris.js';
+import MesFavoris from '../model/service/FavorisProvider.js';
 import PersoProvider from '../model/service/PersoProvider.js';
 
 
@@ -17,7 +17,7 @@ export default class PersoShow {
             </section>
             <p><a href="/">Retour à l'accueil</a></p>
             <p><a href="#/personnages">Retour à la liste des personnages</a></p>
-            <img src="../../img/${personnage.image}" alt="${personnage.nom}">
+            <img data-lazy="../../img/${personnage.image}" alt="${personnage.nom}">
             <button id="add" class="favoris">
                 <i class="fa-regular fa-star"></i>
             </button>
@@ -34,7 +34,7 @@ export default class PersoShow {
         let request = Utils.parseRequestURL()
         const perso = await PersoProvider.getPerso(request.id)
         const personnage = perso[0]
-        const lstFavoris = MesFavoris.getFavoris();
+        const lstFavoris = Array.from(MesFavoris.getFavoris());
 
 
         let add = document.getElementById('add');

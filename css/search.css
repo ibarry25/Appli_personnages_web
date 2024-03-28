@@ -84,6 +84,17 @@ img {
 
 img{
   object-fit: contain;
+  width: 100vw;
+  transform: translateX(50%);
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.fade{
+  opacity: 1.0;
+  transform: translateX(0);
+  transition: all 500ms;
+
 }
 
 .hidden-link {

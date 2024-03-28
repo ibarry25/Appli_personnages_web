@@ -31,6 +31,10 @@ const router = async () => {
     content.innerHTML = await page.render();
     // si on est sur la page de recherche lancée la fonction afterRender()
     if (page.afterRender) await page.afterRender();
+
+    const head = document.querySelector('head');
+    // head.appendChild(document.createElement('script')).src = 'js/model/service/LazyLoading.js';
+
 }
 
 // Listen on hash change:
