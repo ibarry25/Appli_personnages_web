@@ -19,13 +19,18 @@
   justify-content: space-between;
 }
 
+.taille{
+  height: 60vh;
+}
+
 .perso .card img{
   flex-basis: 50%;
 }
 
 img {
-  width: 10vw;
-  height: 10vw;
+  width: 100%;
+  object-fit: contain;
+  height: 99%;
 }
 
 .is-hidden{
@@ -47,6 +52,8 @@ img {
   color: #ffffff!important;
   background-color: #1b95ff!important;
 }
+
+
 
 .page-btn {
   color: #000000;
@@ -91,7 +98,7 @@ img{
 }
 
 .fade{
-  opacity: 1.0;
+  opacity: 1.0!important;
   transform: translateX(0);
   transition: all 500ms;
 
