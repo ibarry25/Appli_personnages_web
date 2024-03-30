@@ -30,6 +30,16 @@ export default class Home {
             </div>
             `
         ).join('\n ');
+
+        if (html === '') {
+            html = /*html*/`
+
+            <div class="erreur">
+                <p class="card-text">Aucun personnage n'a été ajouté à vos favoris</p>
+            </div>
+
+            `;
+        }
         
         return /*html*/`
             <section class="py-5 text-center container">
@@ -44,7 +54,7 @@ export default class Home {
                     </div>
                 </div>
             </section>
-            <h2>Les personnages</h2>
+            <h2>Vos favoris</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 perso">
                 ${html}
             </div>

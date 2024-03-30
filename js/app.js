@@ -3,7 +3,6 @@ import Utils from "./model/service/Utils.js";
 import PersonnageAll from "./views/PersonnageAll.js";
 import Error404 from "./views/Error404.js";
 import PersoShow from "./views/PersoShow.js";
-import LazyLoading from "./model/service/LazyLoading.js";
 
 
 const routes = {
@@ -33,8 +32,6 @@ const router = async () => {
     // si on est sur la page de recherche lancée la fonction afterRender()
     if (page.afterRender) await page.afterRender();
 
-    const lazyLoading = new LazyLoading();
-    lazyLoading.applyLazyLoading();
 
     
 }

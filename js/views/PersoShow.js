@@ -1,31 +1,30 @@
 import Utils from '../model/service/Utils.js';
 import MesFavoris from '../model/service/FavorisProvider.js';
 import PersoProvider from '../model/service/PersoProvider.js';
+import LazyLoading from "../model/service/LazyLoading.js";
 
 
 export default class PersoShow {
     async render () {
-        let lesFavoris 
         let request = Utils.parseRequestURL()
         console.log('request', request)
         const perso = await PersoProvider.getPerso(request.id)
         const personnage = perso[0]
          return /*html*/`
-            <section class="section">
-                <p> Nom : ${personnage.nom} </p>
-                <p> Description : ${personnage.description} </p>
-            </section>
-            <p><a href="/">Retour à l'accueil</a></p>
-            <p><a href="#/personnages">Retour à la liste des personnages</a></p>
-            <img data-lazy="../../img/${personnage.image}" alt="${personnage.nom}">
-            <button id="add" class="favoris">
-                <i class="fa-regular fa-star"></i>
-            </button>
-            <button id="supp" class="favoris is-hidden">
-                <i class="fa-solid fa-star"></i>
-            </button>
-            
-
+         <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="../../img/600x400.png"  data-lazy="../../img/${personnage.image}" class="img-fluid" alt="${personnage.nom}">
+                </div>
+                <div class="col-md-8">
+                    <h2>${personnage.nom}</h2>
+                    <p>${personnage.description}</p>
+                    <button id="add" class="btn btn-primary">Ajouter aux favoris</button>
+                    <button id="supp" class="btn btn-danger is-hidden">Supprimer des favoris</button>
+                </div>
+            </div>
+        </div>
+        
         `
     }
 
@@ -57,6 +56,12 @@ export default class PersoShow {
             add.classList.add('is-hidden');
             supp.classList.remove('is-hidden');
         }
+
+        const lazyLoading = new LazyLoading();
+        lazyLoading.applyLazyLoading();
     }
+
+    
+
 
 }  

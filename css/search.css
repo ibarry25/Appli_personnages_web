@@ -126,3 +126,36 @@ img{
 
 }
 
+.section {
+  padding: 20px;
+  border-bottom: 1px solid #ddd; /* Ligne de séparation */
+}
+
+.section p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.section img {
+  max-width: 100%; /* Pour s'assurer que l'image ne dépasse pas de la section */
+  display: block; /* Pour centrer l'image */
+  margin: 0 auto 20px; /* Marge inférieure pour l'image */
+}
+
+.section .favoris {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: #777; /* Couleur par défaut */
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.section .favoris:hover {
+  color: #f7b71d; /* Couleur au survol */
+}
+
+.section .is-hidden {
+  display: none; /* Pour cacher le bouton de favoris supprimer */
+}
