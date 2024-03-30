@@ -19,6 +19,22 @@ export default class PersoProvider {
        }
     }
 
+    static getAllByGenre = async (genre,limit=6) => {
+        const options = {
+           method: 'GET',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       };
+       try {
+           const response = await fetch(`${ENDPOINT}?types_personnage.id=${genre}&_limit=${limit}`, options)
+           const json = await response.json();
+           return json
+       } catch (err) {
+           console.log('Erreur fetch les persos : ', err)
+       }
+    }
+
     static getPerso = async (id) => {
         const options = {
            method: 'GET',
@@ -50,4 +66,5 @@ export default class PersoProvider {
            console.log('Erreur fetching perso', err)
        }
     }
+
 }

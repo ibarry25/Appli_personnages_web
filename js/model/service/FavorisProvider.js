@@ -4,7 +4,7 @@ class MesFavoris {
 
     static getFavoris()  {
         if (!'favoris' in localStorage) localStorage.setItem('favoris', JSON.stringify([]));
-
+        
         return JSON.parse(localStorage.getItem('favoris')) || [];
 
     }
