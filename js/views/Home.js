@@ -42,7 +42,7 @@ export default class Home {
             html = /*html*/`
 
             <div class="erreur">
-                <p class="card-text">Aucun personnage n'a été ajouté à vos favoris</p>
+                <p id="favoris-err" class="card-text">Aucun personnage n'a été ajouté à vos favoris</p>
             </div>
 
             `;
@@ -86,6 +86,9 @@ export default class Home {
         let aleatoireFavoris = document.getElementById('aleatoire-favoris');
         aleatoireFavoris.addEventListener('click', async function() {
             let random = Math.floor(Math.random() * favoris.length);
+            if (favoris.length === 0) {
+                document.getElementById('favoris-err').classList.add('text-danger');
+            }
             window.location.href = `#/personnages/${favoris[random]}`;
         }
 

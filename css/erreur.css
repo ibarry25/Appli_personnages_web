@@ -9,3 +9,9 @@
     margin: 0;
     padding: 0;
 }
+
+.text-danger{
+    color: red;
+    font-size: xx-large;
+    margin-top: 4vh;
+}
