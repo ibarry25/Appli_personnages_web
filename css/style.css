@@ -7,7 +7,7 @@
 
 @media (min-width:768px) {
   .header-blue {
-    padding-bottom:120px;
+    padding-bottom:50px;
   }
 }
 
@@ -218,3 +218,26 @@
   opacity:0.2;
 }
 
+.imgHome{
+  margin-top: 2vw;
+  max-width: 16vw;
+}
+
+@media (min-width: 768px) {
+  .col-md-2{
+    max-width: 100vw!important;
+    height: 50vh;
+  }
+}
+
+.card:hover .card-image {
+  transform: translateX(-20%);
+}
+
+.card:hover .card-link {
+  display: block;
+}
+
+.card-link {
+  display: none;
+}

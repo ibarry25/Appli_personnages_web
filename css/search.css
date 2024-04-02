@@ -1,4 +1,4 @@
-.card {
+.perso .card {
   margin-bottom: 20px;
   position: relative;
   overflow: auto;
@@ -12,21 +12,25 @@
   color: blue;
 }
 
-.card-body{
+.perso .card-body{
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+.taille{
+  height: 60vh;
+}
+
 .perso .card img{
   flex-basis: 50%;
-
 }
 
 img {
-  width: 10vw;
-  height: 10vw;
+  width: 100%;
+  object-fit: contain;
+  height: 99%;
 }
 
 .is-hidden{
@@ -48,6 +52,8 @@ img {
   color: #ffffff!important;
   background-color: #1b95ff!important;
 }
+
+
 
 .page-btn {
   color: #000000;
@@ -85,6 +91,17 @@ img {
 
 img{
   object-fit: contain;
+  width: 100vw;
+  transform: translateX(50%);
+  opacity: 0;
+  transition: all 500ms;
+}
+
+.fade{
+  opacity: 1.0!important;
+  transform: translateX(0);
+  transition: all 500ms;
+
 }
 
 .hidden-link {
@@ -100,4 +117,58 @@ img{
 
 .card:hover .hidden-link {
   opacity: 1;
+}
+
+.favoris{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.section {
+  padding: 20px;
+  border-bottom: 1px solid #ddd; /* Ligne de séparation */
+}
+
+.section p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.section img {
+  max-width: 100%; /* Pour s'assurer que l'image ne dépasse pas de la section */
+  display: block; /* Pour centrer l'image */
+  margin: 0 auto 20px; /* Marge inférieure pour l'image */
+}
+
+.section .favoris {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: #777; /* Couleur par défaut */
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.section .favoris:hover {
+  color: #f7b71d; /* Couleur au survol */
+}
+
+.section .is-hidden {
+  display: none; /* Pour cacher le bouton de favoris supprimer */
+}
+
+
+.effet{
+  transition: all 0.5s;
+  filter: brightness(40%);
+}
+
+.effet :hover{
+  filter: brightness(1.75);
+  transform: scale(1.1);
+  transition: all 0.5s;
+
 }

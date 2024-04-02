@@ -1,6 +1,6 @@
 import PersoProvider from '../model/service/PersoProvider.js';
 import TypeProvider from '../model/service/TypeProvider.js';
-
+import LazyLoading from '../model/service/LazyLoading.js';
 export default class PersonnageAll {
 
     async render() {
@@ -35,7 +35,7 @@ export default class PersonnageAll {
           
 
 
-          <div id="personnages" class="row gap-2 mt-5"></div>
+          <div id="personnages" class=" gap-2 mt-5"></div>
 
           <div class="pagination">
             <span class="page-btn page-step" data-shown="0">&laquo;</span>
@@ -57,18 +57,17 @@ export default class PersonnageAll {
 
       function createCard(perso) {
         return /*html*/`
-        <div class="card col-md-2 mx-auto">
+        <div class="card col-md-2 taille">
             <strong class="card-text">${perso.nom}</strong>
             <span class="card-text is-hidden">${perso.types_personnage.id}</span>
-            <img src="../../img/${perso.image}" class="card-img" alt="..." loading="lazy">
+            <img src="../../img/600x400.png" data-lazy="../../img/${perso.image}" class="card-img card-image" alt="..." loading="lazy">
             <div class="card-img-overlay">
-                <a class="hidden-link" href="#/personnages/${perso.id_personnage}">Voir plus</a>
+                <a class="hidden-link card-link" href="#/personnages/${perso.id_personnage}">Voir plus</a>
             </div>
         </div>
         `;
-    }
+      }
     
-
 
 
 
@@ -97,7 +96,7 @@ export default class PersonnageAll {
           return listPerso;
       }
 
-      function showInPage(personnages, persoParPage=3) {
+      function showInPage(personnages, persoParPage=5) {
         
               function afficherPage(page,personnages, persoParPage) {
                 let start = (page - 1) * persoParPage;
@@ -124,6 +123,10 @@ export default class PersonnageAll {
                   if (nbPageMax > 5) {
                     afficheBoutonPagination2(page, nbPageMax);
                   } 
+
+                  // Appliquer le lazy loading
+                  const lazyLoading = new LazyLoading();
+                  lazyLoading.applyLazyLoading();
                 
               }
 
@@ -212,6 +215,8 @@ export default class PersonnageAll {
 
               // affiche la 1er page par defaut
               afficherPage(1,personnages,persoParPage);
+
+              
                 
             
       
@@ -243,11 +248,6 @@ export default class PersonnageAll {
       typeSelect.addEventListener('change', () => {
           showInPage(liveSearch(personnages));
       });
-
-
-
-
-
 
 
   }

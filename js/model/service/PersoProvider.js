@@ -3,7 +3,7 @@ import { ENDPOINT } from '../../config.js'
 export default class PersoProvider {
 
 
-    static fetchPerso = async (limit = 10) => {
+    static fetchPerso = async (limit = 50) => {
         const options = {
            method: 'GET',
            headers: {
@@ -12,6 +12,22 @@ export default class PersoProvider {
        };
        try {
            const response = await fetch(`${ENDPOINT}?_limit=${limit}`, options)
+           const json = await response.json();
+           return json
+       } catch (err) {
+           console.log('Erreur fetch les persos : ', err)
+       }
+    }
+
+    static getAllByGenre = async (genre,limit=6) => {
+        const options = {
+           method: 'GET',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       };
+       try {
+           const response = await fetch(`${ENDPOINT}?types_personnage.id=${genre}&_limit=${limit}`, options)
            const json = await response.json();
            return json
        } catch (err) {
@@ -50,4 +66,5 @@ export default class PersoProvider {
            console.log('Erreur fetching perso', err)
        }
     }
+
 }
