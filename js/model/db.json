@@ -351,6 +351,12 @@
       "id": "Mario",
       "id_personnage": 1,
       "note": 1
+    },
+    {
+      "id": "Geralt de Riv",
+      "id_personnage": 8,
+      "id_User": 1,
+      "note": 4
     }
   ],
   "users": [
