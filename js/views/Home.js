@@ -88,6 +88,7 @@ export default class Home {
             let random = Math.floor(Math.random() * favoris.length);
             if (favoris.length === 0) {
                 document.getElementById('favoris-err').classList.add('text-danger');
+                return;
             }
             window.location.href = `#/personnages/${favoris[random]}`;
         }
