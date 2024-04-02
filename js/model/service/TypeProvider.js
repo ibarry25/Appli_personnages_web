@@ -19,5 +19,21 @@ export default class TypeProvider {
        }
     }
 
+    static fetchTypeById = async (id) => {
+        const options = {
+           method: 'GET',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       };
+       try {
+        const response = await fetch(`${ENDPOINTTYPE}?id=${id}`, options)
+        const json = await response.json();
+           return json
+       } catch (err) {
+           console.log('Erreur fetch les types : ', err)
+       }
+    }
+
     
 }

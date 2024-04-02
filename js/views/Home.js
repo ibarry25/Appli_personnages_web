@@ -53,8 +53,7 @@ export default class Home {
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <h1 class="fw-light">Personnages</h1>
-                        <h1 class="header_title mb-0 mt-3">I Am <span id="element" class=" fw-bold" data-elements="protected and secure.,safe and flawless."></span></h1>
-                        <p class="lead text-muted">Découvrez les personnages de Serie</p>
+                        <p class="lead text-body-secondary">Découvrez nos personnages favoris issus de différens médias comme le cinéma et les jeux vidéos.</p>
                         <p>
                             <button id='aleatoire' class="btn btn-primary my-2">Perso aléatoire</button>
                             <button id='aleatoire-favoris' class="btn btn-secondary my-2">Perso aléatoire dans les Favoris</button>
