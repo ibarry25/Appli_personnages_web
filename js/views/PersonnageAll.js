@@ -38,11 +38,11 @@ export default class PersonnageAll {
           <div id="personnages" class=" gap-2 mt-5"></div>
 
           <div class="pagination">
-            <span class="page-btn page-step" data-shown="0">&laquo;</span>
+            <span id="to-first" class="page-btn page-step" data-shown="0">&laquo;</span>
 
             <div id="boutPagination" "> </div>
 
-              <span class="page-btn page-step ml-1" data-shown="-1">&raquo;</span>
+              <span id="to-end" class="page-btn page-step ml-1" data-shown="-1">&raquo;</span>
           </div>
           
         </div>
@@ -99,6 +99,12 @@ export default class PersonnageAll {
       function showInPage(personnages, persoParPage=5) {
         
               function afficherPage(page,personnages, persoParPage) {
+                if (page == 0){
+                  page = 1; // 1er page
+                }
+                if (page == -1){
+                  page =  Math.ceil(personnages.length / persoParPage); // dernière page
+                }
                 let start = (page - 1) * persoParPage;
                 let end = start + persoParPage;
 
@@ -174,6 +180,9 @@ export default class PersonnageAll {
                   bouton.addEventListener('click', () => {
                       let page = parseInt(bouton.innerText);
                       console.log(page);
+                      if (isNaN(page)) {
+                        page = parseInt(bouton.getAttribute('data-shown')) ;
+                      }
                       afficherPage(page,personnages,persoParPage);
                       // Supprimer la classe active de tous les boutons
                       lesBoutons.forEach(btn => btn.classList.remove('active'));
@@ -196,6 +205,9 @@ export default class PersonnageAll {
 
                   document.getElementById('page-1').classList.add('active');
 
+                  // disable the previous button
+                  document.getElementById('to-first').setAttribute('disabled', true);
+
                 })
 
                 BoutonEnd[1].addEventListener('click',()=>{
@@ -204,6 +216,7 @@ export default class PersonnageAll {
                   afficherPage(nbPage, personnages, persoParPage);
 
                   document.getElementById('page-'+nbPage).classList.add('active');
+                  document.getElementById('to-end').setAttribute('disabled', true);
                 })
 
               }
