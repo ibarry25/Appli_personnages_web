@@ -346,6 +346,11 @@
       "id_personnage": 11,
       "id_User": 1,
       "note": 1
+    },
+    {
+      "id": "Mario",
+      "id_personnage": 1,
+      "note": 1
     }
   ],
   "users": [
