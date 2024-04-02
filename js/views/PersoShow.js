@@ -122,7 +122,7 @@ export default class PersoShow {
                 persoAjoute.add(lesPersos[random].id_personnage);
                 persoLike.innerHTML += createCard(lesPersos[random]);
             } else {
-                i--;
+                continue;
             } 
         }
 

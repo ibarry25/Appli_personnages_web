@@ -3,7 +3,7 @@ import { ENDPOINT } from '../../config.js'
 export default class PersoProvider {
 
 
-    static fetchPerso = async (limit = 10) => {
+    static fetchPerso = async (limit = 50) => {
         const options = {
            method: 'GET',
            headers: {

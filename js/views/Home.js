@@ -4,15 +4,15 @@ import LazyLoading from "../model/service/LazyLoading.js";
 
 export default class Home {
     async render() {
-        let personnages = await PersoProvider.fetchPerso(10);
+        let personnages = await PersoProvider.fetchPerso();
 
 
         let favoris = MesFavoris.getFavoris();
         console.log(favoris);
-        let favorisSet = new Set(favoris);
+        let favorisSet = Array.from(favoris).reduce((acc, curr) => acc.add(curr), new Set());
         console.log(favorisSet);
         let persoAffiche = Array.from(personnages).filter(perso => favorisSet.has(perso.id_personnage));
-
+        console.log(persoAffiche);
         
         let html = persoAffiche.map(perso =>
             /*html*/`
@@ -49,11 +49,12 @@ export default class Home {
         }
         
         return /*html*/`
-            <section class="py-5 text-center container">
+            <section class=" text-center container">
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <h1 class="fw-light">Personnages</h1>
-                        <p class="lead text-body-secondary">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, aliquid voluptas sit aperiam quis architecto quaerat vel ratione placeat delectus repellendus cum animi sequi amet corporis minima ab, nisi at!</p>
+                        <h1 class="header_title mb-0 mt-3">I Am <span id="element" class=" fw-bold" data-elements="protected and secure.,safe and flawless."></span></h1>
+                        <p class="lead text-muted">Découvrez les personnages de Serie</p>
                         <p>
                             <button id='aleatoire' class="btn btn-primary my-2">Perso aléatoire</button>
                             <button id='aleatoire-favoris' class="btn btn-secondary my-2">Perso aléatoire dans les Favoris</button>
@@ -62,7 +63,7 @@ export default class Home {
                 </div>
             </section>
             <h2>Vos favoris</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 perso">
+            <div class="row perso">
                 ${html}
             </div>
         `;
@@ -90,6 +91,27 @@ export default class Home {
 
         );
 
-            
+        // Lancer le script suivant 
+
+
+        // Charger Typed.js dynamiquement
+        const typedScript = document.createElement('script');
+        typedScript.src = 'js/script/typed.js';
+        typedScript.async = true;
+        document.body.appendChild(typedScript);
+
+        // Attendre le chargement complet de Typed.js avant de l'utiliser
+        typedScript.onload = () => {
+            // Appliquer Typed.js une fois qu'il est chargé
+            $(".element").each(function() {
+                var $this = $(this);
+                $this.typed({
+                    strings: $this.attr('data-elements').split(','),
+                    typeSpeed: 100,
+                    backDelay: 3000,
+                });
+            });
+        };
     }
+            
 }
