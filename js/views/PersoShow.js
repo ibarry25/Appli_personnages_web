@@ -1,6 +1,5 @@
 import Utils from '../model/service/Utils.js';
 import MesFavoris from '../model/service/FavorisProvider.js';
-import PersoProvider from '../model/service/PersoProvider.js';
 import LazyLoading from "../model/service/LazyLoading.js";
 import NoteProvider from "../model/service/NoteProvider.js"; // Importez la classe NoteProvider
 //import MesFavoris from '../model/service/Favoris.js';

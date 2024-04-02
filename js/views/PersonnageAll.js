@@ -140,7 +140,11 @@ export default class PersonnageAll {
                 `).join('\n ');
 
                 document.getElementById("boutPagination").innerHTML = pagination;
-                document.getElementById('page-'+page).classList.add('active');
+                try {
+                  document.getElementById('page-'+page).classList.add('active');
+                } catch (error) {
+                  console.log("a patch");
+                }
 
                 // Activer les boutons
                 activerButton(nbPageMax);
